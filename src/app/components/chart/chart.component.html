@@ -1,0 +1,21 @@
+<div class="chart" *ngIf="data">
+  <h2 class="chart__title">{{ data.title }}</h2>
+  <h3 class="chart__subtitle">{{ data.subtitle }}</h3>
+  <div #chartRef></div>
+  <div class="chart__dates">
+    <span class="chart__date">{{
+      scheduleDates[0] | date: "MMM d, hh:mm a"
+    }}</span>
+    <span class="chart__date">{{
+      scheduleDates[scheduleDates.length - 1] | date: "MMM d, hh:mm a"
+    }}</span>
+  </div>
+  <mat-form-field appearance="outline" color="warn">
+    <mat-label>chart color</mat-label>
+    <mat-select (selectionChange)="changeChartColor($event)">
+      <mat-option *ngFor="let color of chartColors" [value]="color.value">
+        {{ color.title }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

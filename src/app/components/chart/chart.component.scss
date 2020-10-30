@@ -1,0 +1,46 @@
+.chart {
+  position: relative;
+  width: 320px;
+  padding: 10px;
+  background-color: #ffffff;
+  cursor: pointer;
+  border-radius: 10px;
+  margin: auto;
+  transition: box-shadow 0.2s cubic-bezier(0, 0, 0.2, 1);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+
+  &:hover,
+  &:active {
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+      0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  }
+
+  &__title {
+    color: #b8b8b8;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  &__subtitle {
+    margin: 5px 0;
+  }
+
+  &__link {
+    position: absolute;
+    top: 20;
+    left: 50%;
+  }
+
+  &__dates {
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-30px);
+  }
+
+  &__date {
+    color: #b8b8b8;
+    font-size: 14px;
+  }
+}

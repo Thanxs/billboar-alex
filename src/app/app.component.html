@@ -1,1 +1,10 @@
-<app-spline-chart></app-spline-chart>
+<div
+  class="app"
+  cdkDropListOrientation="horizontal"
+  cdkDropList
+  (cdkDropListDropped)="drop($event)"
+>
+  <div class="app__chart" *ngFor="let chart of charts" cdkDrag>
+    <app-chart [data]="chart"></app-chart>
+  </div>
+</div>
