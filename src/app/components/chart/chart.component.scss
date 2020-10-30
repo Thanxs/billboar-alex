@@ -28,9 +28,13 @@
   }
 
   &__link {
-    position: absolute;
-    top: 20;
-    left: 50%;
+    color: #b8b8b8;
+    margin-left: 10px;
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+      color: #696969;
+    }
   }
 
   &__dates {

@@ -7,11 +7,12 @@ import {
   ViewChild,
 } from '@angular/core';
 
+import { MatSelectChange } from '@angular/material/select';
+
 import { Constants } from 'src/app/shared/constants';
 
 import { bb } from 'billboard.js';
 import * as moment from 'moment';
-import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-chart',
@@ -89,7 +90,8 @@ export class ChartComponent implements OnInit, AfterViewInit {
         y: {
           inner: true,
           tick: {
-            format: (data) => `${(data / 1000).toFixed(1)}K`,
+            format: (data) =>
+              `${(data / Constants.THOUSAND).toFixed(Constants.ONE)}K`,
             values: [
               Math.max(...this.columns[Constants.ONE].slice(Constants.ONE)),
             ],
@@ -119,10 +121,10 @@ export class ChartComponent implements OnInit, AfterViewInit {
     this.chart.focus();
 
     this.chart.export('image/png', (dataUrl: string): any => {
-      // this.chartLink.nativeElement.href = dataUrl;
-      // this.chartLink.nativeElement.download = `${moment().format(
-      //   'YYYY-MM-DD'
-      // )}.png`;
+      this.chartLink.nativeElement.href = dataUrl;
+      this.chartLink.nativeElement.download = `${moment().format(
+        'YYYY-MM-DD hh:mm:ss'
+      )}.png`;
     });
   }
 
