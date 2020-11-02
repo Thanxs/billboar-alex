@@ -47,4 +47,10 @@
     color: #b8b8b8;
     font-size: 14px;
   }
+
+  &__tooltip {
+    position: absolute;
+    top: 7%;
+    left: 35%;
+  }
 }

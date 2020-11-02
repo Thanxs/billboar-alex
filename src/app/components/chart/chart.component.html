@@ -1,7 +1,17 @@
 <div class="chart" *ngIf="data">
   <h2 class="chart__title">{{ data.title }}</h2>
   <h3 class="chart__subtitle">{{ data.subtitle }}</h3>
-  <div #chartRef></div>
+  <div #chartRef (mousemove)="showTippy()"></div>
+  <div
+    class="chart__tooltip"
+    #tooltip
+    tippy
+    [tippyOptions]="{
+      duration: 0,
+      animation: 'fade',
+      arrow: false
+    }"
+  ></div>
   <div class="chart__dates">
     <span class="chart__date">{{
       scheduleDates[0] | date: "MMM d, hh:mm a"

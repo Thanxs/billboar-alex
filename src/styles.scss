@@ -1,5 +1,7 @@
 @import "./../node_modules/billboard.js/dist/billboard.css";
-
+@import "./../node_modules/tippy.js/dist/tippy.css";
+@import "./../node_modules/tippy.js/animations/scale-extreme.css";
+@import "./../node_modules/tippy.js/animations/scale.css";
 html,
 body {
   height: 100%;
@@ -7,4 +9,19 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  margin: 0;
+  padding: 0;
+}
+
+#hide {
+  display: none;
 }

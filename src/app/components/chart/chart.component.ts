@@ -13,6 +13,7 @@ import { Constants } from 'src/app/shared/constants';
 
 import { bb } from 'billboard.js';
 import * as moment from 'moment';
+import tippy from 'tippy.js';
 
 @Component({
   selector: 'app-chart',
@@ -30,10 +31,15 @@ export class ChartComponent implements OnInit, AfterViewInit {
   ];
 
   private selectedColor: string;
+  private tooltipData: { title: string; value: string } = {
+    title: '',
+    value: '',
+  };
 
   @Input() public data;
   @ViewChild('chartRef') private chartRef: ElementRef;
   @ViewChild('chartLink') private chartLink: ElementRef;
+  @ViewChild('tooltip') private tooltip: ElementRef;
 
   constructor() {}
 
@@ -49,7 +55,6 @@ export class ChartComponent implements OnInit, AfterViewInit {
 
   private createChart() {
     const { type, columns } = this.data;
-
     this.chart = bb.generate({
       bindto: this.chartRef.nativeElement,
       data: {
@@ -85,6 +90,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
           tick: {
             format: (date) => moment(date).format('MMM, DD, h:mm a'),
             values: [],
+            tooltip: false,
           },
         },
         y: {
@@ -101,6 +107,26 @@ export class ChartComponent implements OnInit, AfterViewInit {
 
       point: {
         show: false,
+      },
+      tooltip: {
+        contents: {
+          bindto: this.tooltip.nativeElement,
+          text: {
+            VAR: ['A', 'B', 'C', 'TextA'],
+          },
+          template:
+            '<ul id="hide"><li>{=TITLE}</li>{{<li class={=CLASS_TOOLTIP_NAME}><span>{=VALUE}:{=VAR}</span></li>}}</ul>',
+        },
+        format: {
+          title: (date) => {
+            this.tooltipData.title = moment(date).format('MMM, DD, YYYY');
+            return this.tooltipData.title;
+          },
+          value: (value) => {
+            this.tooltipData.value = value;
+            return this.tooltipData.value;
+          },
+        },
       },
     });
 
@@ -131,5 +157,12 @@ export class ChartComponent implements OnInit, AfterViewInit {
   public changeChartColor(event: MatSelectChange) {
     this.selectedColor = event.value;
     this.createChart();
+  }
+
+  showTippy() {
+    tippy(this.chartRef.nativeElement, {
+      content: `<ul><li>${this.tooltipData.title}</li><li>${this.tooltipData.value}</li></ul>`,
+      allowHTML: true,
+    });
   }
 }
